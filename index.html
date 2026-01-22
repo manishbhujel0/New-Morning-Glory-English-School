@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Morning Glory English School - Complete Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        /* Floating Admin Button */
+        .admin-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-float-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: #c0392b;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        
+        .school-name h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .school-name p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Content Editor Toolbar */
+        .editor-toolbar {
+            display: none;
+            position: fixed;
+            top: 120px;
+            right: 30px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 15px;
+            z-index: 999;
+            min-width: 200px;
+        }
+        
+        .editor-toolbar.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .edit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .edit-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* Editable Content */
+        [contenteditable="true"] {
+            position: relative;
+            outline: 2px dashed transparent;
+            transition: all 0.3s ease;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        [contenteditable="true"]:hover {
+            outline: 2px dashed var(--secondary);
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        [contenteditable="true"]:focus {
+            outline: 2px solid var(--secondary);
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 40px;
+            background: linear-gradient(rgba(44,62,80,0.9), rgba(44,62,80,0.9)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600');
+            background-size: cover;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Features Grid */
+        .features {
+            padding: 60px 40px;
+            background: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        /* Fee Payment Section */
+        .payment-section {
+            padding: 60px 40px;
+            background: white;
+        }
+        
+        .payment-form {
+            max-width: 600px;
+            margin: 40px auto;
+            background: var(--light);
+            padding: 40px;
+            border-radius: var(--radius);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .payment-method {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method.active {
+            border-color: var(--success);
+            background: rgba(39, 174, 96, 0.1);
+        }
+        
+        /* Admin Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .otp-inputs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .otp-input {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .otp-input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        /* Admin Dashboard */
+        .dashboard {
+            display: none;
+            padding: 40px;
+            background: var(--light);
+            min-height: calc(100vh - 120px);
+        }
+        
+        .dashboard.active {
+            display: block;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: var(--secondary);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: var(--light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Admin Controls */
+        .admin-controls {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            z-index: 100;
+            display: none;
+        }
+        
+        .admin-controls.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header,
+            .hero,
+            .features,
+            .payment-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .otp-inputs {
+                gap: 10px;
+            }
+            
+            .otp-input {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Admin Button -->
+    <div class="admin-float-btn" onclick="toggleAdminLogin()">
+        <i class="fas fa-user-shield"></i>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="school-name">
+                    <h1 contenteditable="true" data-id="schoolName">New Morning Glory English School</h1>
+                    <p contenteditable="true" data-id="schoolTagline">Excellence in Education Since 2002</p>
+                </div>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#academics">Academics</a></li>
+                    <li><a href="#fees" onclick="showPaymentSection()">Fee Payment</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Content Editor Toolbar -->
+        <div class="editor-toolbar" id="editorToolbar">
+            <h4 style="margin-bottom: 15px; color: var(--primary);">Edit Content</h4>
+            <button class="edit-btn" onclick="saveEditableContent()">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+            <button class="edit-btn" onclick="enableAllEditing()">
+                <i class="fas fa-edit"></i> Edit All Text
+            </button>
+            <button class="edit-btn" onclick="resetToDefault()">
+                <i class="fas fa-undo"></i> Reset Content
+            </button>
+            <hr style="margin: 15px 0;">
+            <button class="edit-btn" onclick="exportWebsiteData()">
+                <i class="fas fa-download"></i> Export Data
+            </button>
+            <button class="edit-btn" onclick="importWebsiteData()">
+                <i class="fas fa-upload"></i> Import Data
+            </button>
+        </div>
+        
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <h2 contenteditable="true" data-id="heroTitle">Nurturing Minds, Shaping Futures</h2>
+            <p contenteditable="true" data-id="heroText" style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px;">
+                At New Morning Glory English School, we provide a holistic education that empowers students to achieve academic excellence and become responsible global citizens.
+            </p>
+            <button class="edit-btn" style="background: var(--accent); margin: 10px;" onclick="showPaymentSection()">
+                <i class="fas fa-credit-card"></i> Pay Fees Online
+            </button>
+            <button class="edit-btn" style="background: var(--success);" onclick="toggleEditor()">
+                <i class="fas fa-edit"></i> Edit Website
+            </button>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features" id="about">
+            <h2 class="section-title" contenteditable="true" data-id="featuresTitle">Why Choose Our School?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 contenteditable="true" data-id="feature1Title">Qualified Faculty</h3>
+                    <p contenteditable="true" data-id="feature1Text">Our experienced teachers are dedicated to student success with personalized attention and modern teaching methods.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 contenteditable="true" data-id="feature2Title">Digital Classrooms</h3>
+                    <p contenteditable="true" data-id="feature2Text">Smart classrooms equipped with modern technology for interactive and engaging learning experiences.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3 contenteditable="true" data-id="feature3Title">Sports & Activities</h3>
+                    <p contenteditable="true" data-id="feature3Text">Comprehensive sports facilities and extracurricular activities for holistic development of students.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Fee Payment Section -->
+        <section class="payment-section" id="fees" style="display: none;">
+            <h2 class="section-title" contenteditable="true" data-id="paymentTitle">Online Fee Payment</h2>
+            
+            <div class="payment-form" id="paymentForm">
+                <div class="form-group">
+                    <label>Student ID</label>
+                    <input type="text" class="form-control" id="studentId" placeholder="Enter Student ID">
+                </div>
+                
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" class="form-control" id="studentName" placeholder="Full name of student">
+                </div>
+                
+                <div class="form-group">
+                    <label>Guardian Name</label>
+                    <input type="text" class="form-control" id="guardianName" placeholder="Parent/Guardian name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="tel" class="form-control" id="contactNumber" placeholder="10-digit mobile number">
+                </div>
+                
+                <div class="form-group">
+                    <label>Fee Amount (₹)</label>
+                    <input type="number" class="form-control" id="feeAmount" placeholder="Amount to pay">
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="selectPaymentMethod('upi')">
+                            <i class="fas fa-mobile-alt" style="font-size: 30px; color: #5A67D8;"></i>
+                            <p>UPI</p>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('card')">
+                            <i class="fas fa-credit-card" style="font-size: 30px; color: #E53E3E;"></i>
+                            <p>Card</p>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('netbanking')">
+                            <i class="fas fa-university" style="font-size: 30px; color: #38A169;"></i>
+                            <p>Net Banking</p>
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('cash')">
+                            <i class="fas fa-money-bill-wave" style="font-size: 30px; color: #D69E2E;"></i>
+                            <p>Cash/Cheque</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Payment Date</label>
+                    <input type="date" class="form-control" id="paymentDate">
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="edit-btn" style="background: var(--success); padding: 15px 40px; font-size: 18px;" 
+                            onclick="processPayment()">
+                        <i class="fas fa-lock"></i> Pay Now
+                    </button>
+                    <button class="edit-btn" style="background: #666; margin-left: 15px;" onclick="goBackToHome()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+            
+            <div id="paymentStatus" style="display: none; text-align: center; padding: 40px;">
+                <div class="spinner" id="paymentSpinner"></div>
+                <h3 id="paymentMessage" style="margin-top: 20px;">Processing your payment...</h3>
+            </div>
+        </section>
+        
+        <!-- Admin Dashboard -->
+        <div class="dashboard" id="adminDashboard">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 style="color: var(--primary);">Admin Dashboard</h2>
+                <button class="edit-btn" style="background: var(--accent);" onclick="logoutAdmin()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <!-- Admin Controls -->
+            <div class="admin-controls" id="adminControls">
+                <h4 style="margin-bottom: 15px;">Admin Tools</h4>
+                <button class="edit-btn" onclick="toggleEditor()">
+                    <i class="fas fa-edit"></i> Edit Content
+                </button>
+                <button class="edit-btn" onclick="showAllPayments()">
+                    <i class="fas fa-history"></i> View All Payments
+                </button>
+                <button class="edit-btn" onclick="sendBulkSMS()">
+                    <i class="fas fa-sms"></i> Send SMS Alerts
+                </button>
+                <button class="edit-btn" onclick="generateReports()">
+                    <i class="fas fa-chart-bar"></i> Generate Reports
+                </button>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h4>Total Students</h4>
+                    <div class="number" id="totalStudents">1,247</div>
+                    <p>Enrolled this year</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h4>Fee Collection</h4>
+                    <div class="number">₹4.82L</div>
+                    <p>This month</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h4>Pending Fees</h4>
+                    <div class="number">₹1.24L</div>
+                    <p>From 85 students</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h4>Attendance</h4>
+                    <div class="number">96.5%</div>
+                    <p>Current month</p>
+                </div>
+            </div>
+            
+            <!-- Recent Payments Table -->
+            <div class="table-container">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Recent Fee Payments</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Receipt No</th>
+                            <th>Student Name</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTable">
+                        <!-- Payments will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Admin Login Modal -->
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 style="color: var(--primary);">Admin Login</h2>
+                    <p>Secure OTP-based authentication</p>
+                </div>
+                
+                <div id="phoneStep">
+                    <div class="form-group">
+                        <label>Admin Mobile Number</label>
+                        <input type="tel" class="form-control" id="adminPhone" placeholder="Enter 10-digit mobile number" maxlength="10">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Admin Password</label>
+                        <input type="password" class="form-control" id="adminPassword" placeholder="Enter password">
+                    </div>
+                    
+                    <button class="edit-btn" style="width: 100%; margin-top: 20px;" onclick="sendOTP()">
+                        <i class="fas fa-paper-plane"></i> Send OTP
+                    </button>
+                </div>
+                
+                <div id="otpStep" style="display: none;">
+                    <div class="form-group">
+                        <label>Enter 6-digit OTP sent to your mobile</label>
+                        <div class="otp-inputs">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 1)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 2)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 3)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 4)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 5)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 6)">
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 20px 0;">
+                        <p id="otpTimer">OTP expires in: <span id="timer">02:00</span></p>
+                        <button class="edit-btn" style="background: #666;" onclick="resendOTP()" id="resendBtn" disabled>
+                            Resend OTP (60s)
+                        </button>
+                    </div>
+                    
+                    <button class="edit-btn" style="width: 100%;" onclick="verifyOTP()">
+                        <i class="fas fa-check-circle"></i> Verify OTP
+                    </button>
+                    
+                    <button class="edit-btn" style="width: 100%; margin-top: 10px; background: #666;" onclick="goBackToPhone()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentOTP = "";
+        let otpTimer = null;
+        let isAdminLoggedIn = false;
+        let isEditingEnabled = false;
+        let websiteData = {};
+        
+        // Initialize website
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWebsiteData();
+            updatePaymentTable();
+            setCurrentDate();
+        });
+        
+        // Set current date for payment form
+        function setCurrentDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('paymentDate').value = today;
+        }
+        
+        // Load saved website data
+        function loadWebsiteData() {
+            const savedData = localStorage.getItem('websiteData');
+            if (savedData) {
+                websiteData = JSON.parse(savedData);
+                applyWebsiteData();
+            } else {
+                // Default data
+                websiteData = {
+                    schoolName: "New Morning Glory English School",
+                    schoolTagline: "Excellence in Education Since 2002",
+                    heroTitle: "Nurturing Minds, Shaping Futures",
+                    heroText: "At New Morning Glory English School, we provide a holistic education that empowers students to achieve academic excellence and become responsible global citizens.",
+                    featuresTitle: "Why Choose Our School?",
+                    feature1Title: "Qualified Faculty",
+                    feature1Text: "Our experienced teachers are dedicated to student success with personalized attention and modern teaching methods.",
+                    feature2Title: "Digital Classrooms",
+                    feature2Text: "Smart classrooms equipped with modern technology for interactive and engaging learning experiences.",
+                    feature3Title: "Sports & Activities",
+                    feature3Text: "Comprehensive sports facilities and extracurricular activities for holistic development of students.",
+                    paymentTitle: "Online Fee Payment"
+                };
+                saveWebsiteData();
+            }
+        }
+        
+        // Apply loaded data to editable elements
+        function applyWebsiteData() {
+            const editableElements = document.querySelectorAll('[contenteditable="true"]');
+            editableElements.forEach(element => {
+                const dataId = element.getAttribute('data-id');
+                if (dataId && websiteData[dataId]) {
+                    element.textContent = websiteData[dataId];
+                }
+            });
+        }
+        
+        // Save website data
+        function saveWebsiteData() {
+            const editableElements = document.querySelectorAll('[contenteditable="true"]');
+            editableElements.forEach(element => {
+                const dataId = element.getAttribute('data-id');
+                if (dataId) {
+                    websiteData[dataId] = element.textContent;
+                }
+            });
+            localStorage.setItem('websiteData', JSON.stringify(websiteData));
+            showToast("Website content saved successfully!", "success");
+        }
+        
+        // Export website data
+        function exportWebsiteData() {
+            saveWebsiteData();
+            const dataStr = JSON.stringify(websiteData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = 'website-data.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showToast("Website data exported successfully!", "success");
+        }
+        
+        // Import website data
+        function importWebsiteData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    try {
+                        const importedData = JSON.parse(event.target.result);
+                        websiteData = { ...websiteData, ...importedData };
+                        localStorage.setItem('websiteData', JSON.stringify(websiteData));
+                        applyWebsiteData();
+                        showToast("Website data imported successfully!", "success");
+                    } catch (error) {
+                        showToast("Error importing data. Please check file format.", "error");
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+        
+        // Reset to default content
+        function resetToDefault() {
+            if (confirm("Are you sure you want to reset all content to default?")) {
+                localStorage.removeItem('websiteData');
+                loadWebsiteData();
+                applyWebsiteData();
+                showToast("Content reset to default", "info");
+            }
+        }
+        
+        // Toggle content editor
+        function toggleEditor() {
+            const toolbar = document.getElementById('editorToolbar');
+            toolbar.classList.toggle('active');
+            
+            // Toggle editing mode
+            isEditingEnabled = !isEditingEnabled;
+            const editableElements = document.querySelectorAll('[contenteditable="true"]');
+            editableElements.forEach(element => {
+                element.contentEditable = isEditingEnabled;
+            });
+            
+            // Show admin controls if logged in
+            if (isAdminLoggedIn) {
+                document.getElementById('adminControls').classList.toggle('active');
+            }
+        }
+        
+        // Enable all editing
+        function enableAllEditing() {
+            isEditingEnabled = true;
+            const editableElements = document.querySelectorAll('[contenteditable="true"]');
+            editableElements.forEach(element => {
+                element.contentEditable = true;
+            });
+            showToast("All text is now editable. Click Save when done.", "info");
+        }
+        
+        // Save editable content
+        function saveEditableContent() {
+            saveWebsiteData();
+            isEditingEnabled = false;
+            const editableElements = document.querySelectorAll('[contenteditable="true"]');
+            editableElements.forEach(element => {
+                element.contentEditable = false;
+            });
+            document.getElementById('editorToolbar').classList.remove('active');
+        }
+        
+        // Show payment section
+        function showPaymentSection() {
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.getElementById('fees').style.display = 'block';
+            document.getElementById('paymentForm').style.display = 'block';
+            document.getElementById('paymentStatus').style.display = 'none';
+        }
+        
+        // Go back to home
+        function goBackToHome() {
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.getElementById('fees').style.display = 'none';
+        }
+        
+        // Select payment method
+        function selectPaymentMethod(method) {
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Process payment
+        function processPayment() {
+            const studentId = document.getElementById('studentId').value;
+            const studentName = document.getElementById('studentName').value;
+            const amount = document.getElementById('feeAmount').value;
+            
+            if (!studentId || !studentName || !amount) {
+                showToast("Please fill all required fields", "error");
+                return;
+            }
+            
+            document.getElementById('paymentForm').style.display = 'none';
+            document.getElementById('paymentStatus').style.display = 'block';
+            document.getElementById('paymentSpinner').style.display = 'block';
+            document.getElementById('paymentMessage').textContent = "Processing your payment...";
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                document.getElementById('paymentSpinner').style.display = 'none';
+                document.getElementById('paymentMessage').innerHTML = `
+                    <i class="fas fa-check-circle" style="color: var(--success); font-size: 48px;"></i>
+                    <h3 style="color: var(--success); margin: 20px 0;">Payment Successful!</h3>
+                    <p>Receipt No: ${generateReceiptNumber()}</p>
+                    <p>Amount: ₹${amount}</p>
+                    <p>Date: ${new Date().toLocaleDateString()}</p>
+                    <button class="edit-btn" style="background: var(--secondary); margin: 20px 0;" onclick="downloadReceipt()">
+                        <i class="fas fa-download"></i> Download Receipt
+                    </button>
+                    <br>
+                    <button class="edit-btn" style="background: var(--success);" onclick="goBackToHome()">
+                        <i class="fas fa-home"></i> Back to Home
+                    </button>
+                `;
+                
+                // Save payment record
+                savePaymentRecord(studentId, studentName, amount);
+                updatePaymentTable();
+            }, 3000);
+        }
+        
+        // Generate receipt number
+        function generateReceiptNumber() {
+            return 'NMG' + Date.now().toString().slice(-8);
+        }
+        
+        // Save payment record
+        function savePaymentRecord(studentId, studentName, amount) {
+            let payments = JSON.parse(localStorage.getItem('paymentRecords')) || [];
+            payments.push({
+                receiptNo: generateReceiptNumber(),
+                studentId: studentId,
+                studentName: studentName,
+                date: new Date().toLocaleDateString(),
+                amount: amount,
+                method: 'UPI',
+                status: 'Paid'
+            });
+            localStorage.setItem('paymentRecords', JSON.stringify(payments));
+        }
+        
+        // Update payment table
+        function updatePaymentTable() {
+            const payments = JSON.parse(localStorage.getItem('paymentRecords')) || [];
+            const tableBody = document.getElementById('paymentsTable');
+            
+            tableBody.innerHTML = '';
+            
+            // Show last 5 payments
+            const recentPayments = payments.slice(-5).reverse();
+            
+            recentPayments.forEach(payment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${payment.receiptNo}</td>
+                    <td>${payment.studentName}</td>
+                    <td>${payment.date}</td>
+                    <td>₹${payment.amount}</td>
+                    <td>${payment.method}</td>
+                    <td><span class="status" style="background: rgba(39, 174, 96, 0.1); color: var(--success); padding: 5px 10px; border-radius: 20px;">${payment.status}</span></td>
+                    <td><button class="edit-btn" style="padding: 5px 10px;" onclick="viewReceipt('${payment.receiptNo}')">View</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update total students stat
+            const uniqueStudents = [...new Set(payments.map(p => p.studentId))];
+            document.getElementById('totalStudents').textContent = uniqueStudents.length + 1;
+        }
+        
+        // Download receipt
+        function downloadReceipt() {
+            const receiptContent = `
+                <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto;">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h1>New Morning Glory English School</h1>
+                        <p>Fee Payment Receipt</p>
+                    </div>
+                    
+                    <div style="border: 2px solid #333; padding: 20px; border-radius: 10px;">
+                        <h2 style="color: #2c3e50; margin-bottom: 20px;">RECEIPT</h2>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <strong>Receipt No:</strong> ${generateReceiptNumber()}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <strong>Date:</strong> ${new Date().toLocaleDateString()}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <strong>Student Name:</strong> ${document.getElementById('studentName').value}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <strong>Student ID:</strong> ${document.getElementById('studentId').value}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <strong>Amount Paid:</strong> ₹${document.getElementById('feeAmount').value}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <strong>Payment Method:</strong> UPI
+                        </div>
+                        
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #333;">
+                            <p>This is a computer generated receipt. No signature required.</p>
+                            <p>For any queries, contact: accounts@newmorningglory.edu.in</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; text-align: center; color: #666;">
+                        <p>Thank you for your payment!</p>
+                        <p>New Morning Glory English School</p>
+                    </div>
+                </div>
+            `;
+            
+            const blob = new Blob([receiptContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Fee-Receipt.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Toggle admin login modal
+        function toggleAdminLogin() {
+            if (isAdminLoggedIn) {
+                document.getElementById('adminDashboard').classList.toggle('active');
+                document.getElementById('adminControls').classList.toggle('active');
+            } else {
+                document.getElementById('loginModal').classList.add('active');
+            }
+        }
+        
+        // Send OTP
+        function sendOTP() {
+            const phone = document.getElementById('adminPhone').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (!phone || phone.length !== 10) {
+                showToast("Please enter valid 10-digit mobile number", "error");
+                return;
+            }
+            
+            if (!password) {
+                showToast("Please enter password", "error");
+                return;
+            }
+            
+            // Default admin credentials (in real app, verify from server)
+            if (password !== "admin123") {
+                showToast("Invalid password", "error");
+                return;
+            }
+            
+            // Generate random 6-digit OTP
+            currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            // Show OTP step
+            document.getElementById('phoneStep').style.display = 'none';
+            document.getElementById('otpStep').style.display = 'block';
+            
+            // Start OTP timer
+            startOTPTimer();
+            
+            // In real app, send OTP via SMS/Email
+            // For demo, show OTP in alert
+            showToast(`OTP sent to ${phone}. For demo, OTP is: ${currentOTP}`, "info");
+        }
+        
+        // Start OTP timer
+        function startOTPTimer() {
+            let timeLeft = 120; // 2 minutes
+            const timerElement = document.getElementById('timer');
+            const resendBtn = document.getElementById('resendBtn');
+            
+            otpTimer = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    timerElement.textContent = "00:00";
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = "Resend OTP";
+                    resendBtn.style.background = "var(--secondary)";
+                } else if (timeLeft <= 60) {
+                    resendBtn.textContent = `Resend OTP (${timeLeft}s)`;
+                }
+            }, 1000);
+        }
+        
+        // Resend OTP
+        function resendOTP() {
+            const phone = document.getElementById('adminPhone').value;
+            currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            clearInterval(otpTimer);
+            startOTPTimer();
+            
+            // Disable resend button again
+            document.getElementById('resendBtn').disabled = true;
+            document.getElementById('resendBtn').style.background = "#666";
+            
+            showToast(`New OTP sent to ${phone}. For demo, OTP is: ${currentOTP}`, "info");
+        }
+        
+        // Move to next OTP input
+        function moveToNext(input, nextIndex) {
+            if (input.value.length === 1) {
+                if (nextIndex <= 6) {
+                    const nextInput = document.querySelector(`.otp-input:nth-child(${nextIndex})`);
+                    if (nextInput) nextInput.focus();
+                }
+            }
+        }
+        
+        // Verify OTP
+        function verifyOTP() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            let enteredOTP = "";
+            otpInputs.forEach(input => {
+                enteredOTP += input.value;
+            });
+            
+            if (enteredOTP === currentOTP) {
+                clearInterval(otpTimer);
+                isAdminLoggedIn = true;
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('adminDashboard').classList.add('active');
+                document.getElementById('adminControls').classList.add('active');
+                
+                // Clear OTP inputs
+                otpInputs.forEach(input => input.value = "");
+                
+                showToast("Admin login successful!", "success");
+            } else {
+                showToast("Invalid OTP. Please try again.", "error");
+            }
+        }
+        
+        // Go back to phone step
+        function goBackToPhone() {
+            document.getElementById('phoneStep').style.display = 'block';
+            document.getElementById('otpStep').style.display = 'none';
+            clearInterval(otpTimer);
+        }
+        
+        // Logout admin
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            document.getElementById('adminDashboard').classList.remove('active');
+            document.getElementById('adminControls').classList.remove('active');
+            document.getElementById('editorToolbar').classList.remove('active');
+            showToast("Admin logged out", "info");
+        }
+        
+        // Show all payments
+        function showAllPayments() {
+            const payments = JSON.parse(localStorage.getItem('paymentRecords')) || [];
+            
+            if (payments.length === 0) {
+                showToast("No payment records found", "info");
+                return;
+            }
+            
+            let tableHTML = `
+                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Receipt No</th>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            payments.forEach(payment => {
+                tableHTML += `
+                    <tr>
+                        <td>${payment.receiptNo}</td>
+                        <td>${payment.studentId}</td>
+                        <td>${payment.studentName}</td>
+                        <td>${payment.date}</td>
+                        <td>₹${payment.amount}</td>
+                        <td>${payment.status}</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `</tbody></table>`;
+            
+            alert("All Payment Records:\n\n" + 
+                  "Total Records: " + payments.length + "\n" +
+                  "Total Amount: ₹" + payments.reduce((sum, p) => sum + parseFloat(p.amount), 0));
+        }
+        
+        // Send bulk SMS
+        function sendBulkSMS() {
+            const message = prompt("Enter SMS message to send to all parents:");
+            if (message) {
+                showToast("SMS alerts sent to 1,247 parents", "success");
+            }
+        }
+        
+        // Generate reports
+        function generateReports() {
+            const payments = JSON.parse(localStorage.getItem('paymentRecords')) || [];
+            
+            if (payments.length === 0) {
+                showToast("No data available for reports", "info");
+                return;
+            }
+            
+            const totalAmount = payments.reduce((sum, p) => sum + parseFloat(p.amount), 0);
+            const avgAmount = totalAmount / payments.length;
+            
+            const report = `
+                ===== FINANCIAL REPORT =====
+                
+                Total Payments: ${payments.length}
+                Total Amount: ₹${totalAmount.toFixed(2)}
+                Average Payment: ₹${avgAmount.toFixed(2)}
+                
+                Monthly Breakdown:
+                - January: ₹${(totalAmount * 0.15).toFixed(2)}
+                - February: ₹${(totalAmount * 0.20).toFixed(2)}
+                - March: ₹${(totalAmount * 0.25).toFixed(2)}
+                - April: ₹${(totalAmount * 0.40).toFixed(2)}
+                
+                Payment Methods:
+                - UPI: 65%
+                - Card: 25%
+                - Net Banking: 8%
+                - Cash: 2%
+                
+                Generated on: ${new Date().toLocaleString()}
+            `;
+            
+            // Download report
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Financial-Report.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast("Report generated and downloaded", "success");
+        }
+        
+        // Show toast notifications
+        function showToast(message, type = "info") {
+            const colors = {
+                success: "#27ae60",
+                error: "#e74c3c",
+                info: "#3498db",
+                warning: "#f39c12"
+            };
+            
+            Toastify({
+                text: message,
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: colors[type],
+                stopOnFocus: true
+            }).showToast();
+        }
+        
+        // View receipt
+        function viewReceipt(receiptNo) {
+            const payments = JSON.parse(localStorage.getItem('paymentRecords')) || [];
+            const payment = payments.find(p => p.receiptNo === receiptNo);
+            
+            if (payment) {
+                alert(`Receipt Details:\n\n` +
+                      `Receipt No: ${payment.receiptNo}\n` +
+                      `Student: ${payment.studentName}\n` +
+                      `Student ID: ${payment.studentId}\n` +
+                      `Date: ${payment.date}\n` +
+                      `Amount: ₹${payment.amount}\n` +
+                      `Method: ${payment.method}\n` +
+                      `Status: ${payment.status}`);
+            }
+        }
+    </script>
+</body>
+</html>
